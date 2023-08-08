@@ -1,0 +1,105 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Q4</title>
+    <script lang="javascript">
+        var ws = new WebSocket("ws://localhost:7485");
+        ws.addEventListener("message", (ans) => {
+            var msg = ans.data;
+            document.getElementById("chatlog").innerHTML += "<br> Bote ::-   " + msg;
+        });
+
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            document.getElementById("chatlog").innerHTML += "<br> You ::-   " + message;
+            ws.send(message);
+            document.getElementById("message").value = "";
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Chat</h2>
+    <div id="chatlog"></div>
+    <hr />
+    <h2>Input</h2>
+    <input type="text" id="message" />
+    <input type="button" id="b1" onclick="sendMessage()" value="send" />
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chat Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        #chatlog {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        #message {
+            width: 300px;
+            padding: 5px;
+        }
+
+        #b1 {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #b1:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script lang="javascript">
+        var ws = new WebSocket("ws://localhost:7485");
+        ws.addEventListener("message", (ans) => {
+            var msg = ans.data;
+            document.getElementById("chatlog").innerHTML += "<br><strong>Bot::- </strong> " + msg;
+            // Scroll to the bottom of the chat log
+            document.getElementById("chatlog").scrollTop = document.getElementById("chatlog").scrollHeight;
+        });
+
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            document.getElementById("chatlog").innerHTML += "<br><strong>You::- </strong> " + message;
+            document.getElementById("chatlog").scrollTop = document.getElementById("chatlog").scrollHeight;
+            ws.send(message);
+            document.getElementById("message").value = "";
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Chat Application</h2>
+    <div id="chatlog"></div>
+    <hr />
+    <h2>Input</h2>
+    <input type="text" id="message" />
+    <input type="button" id="b1" onclick="sendMessage()" value="Send" />
+
+</body>
+
+</html>
